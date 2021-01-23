@@ -1,0 +1,22 @@
+Le code n'etant pas très long, j'ai tout mis dans le même fichier.
+Pour compiler et executer ecrire dans un terminal bash : g++ -o test main.cpp && ./test
+Une fois que le programme aura compilé il affichera "Que voulez vous faire ?"
+Si vous écrivez :
+    encoder : alors le programme attendra que vous écriviez une phrase (pas de majuscules ni de double espaces ni de caractères spéciaux svp)
+              une fois cette phrase écrite appuyer sur entrée, le programme attend alors que vous écriviez un nom de fichier comme "audio" par exemple, il va créer un fichier nommé "audio.wav" avec le texte lu en morse
+    décoder : alors le programme va attendre que vous donniez le nom de fichier puis va le lire et le décoder et afficher alors le texte décodé
+    quelque chose d'autre : rien ne va se passer
+
+
+Pour lire le programme :
+
+J'ai défini au tout debut la duree du ti, du ta, la durée entre chaque ti/ta, entre chaque lettre et entre chaque mot
+Les deux fonctions gen_dict créer un map qui sert à encoder et décoder le morse
+La fonction initialiser_fichier écrit l'entete du fichier wav
+La fonction ecrire_fichier prend un caractere (soit 0 soit 1 soit /) et ecrit dans le fichier un sinus plus ou moins long (si 0 ou 1) ou une suite de 0 (si /) et rajoute dans tous les cas une suite de 0 a la fin
+La fonction terminer_fichier complète l'entete
+
+La fonction lire_fichier est assez moche car elle comporte beaucoup de if
+L'idée de cette fonction est que elle lit 2 octets par 2 octets le fichier (on a ecrit les int sur 2 octets) et compte le nombre de 0 d'affilée
+A partir de ce nombre de 0 d'affilée elle déduit si on a un espace (//), une séparation entre lettre(/) ou entre signe.
+Elle regarde ensuite l'ecart entre les deux derniers zero pour savoir si cette ecart correspond a un ti ou a un ta
